@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
 
 
 class RoomList extends Component {
     constructor(props) {
         super(props)
+        
         this.roomsRef = props.database.database().ref('rooms');
+
         
             this.state = {
+            name: '',
             rooms: []
         };
     }
@@ -18,13 +22,37 @@ class RoomList extends Component {
             this.setState({ rooms: this.state.rooms.concat(room)});
         });
     }
+    
+    createRoom(e) {
+        if (!this.state.name)
+        return;
+        
+        this.roomsRef.push({ name: this.state.name});
+        this.setState({ name: '' });
+
+    }
+    
+    handleChange(e) {
+        this.setState({ name: e.target.value });
+    }
+    
 
     render() {
-        const roomList = this.state.rooms.map((room) =>
-            <li key = {room.key}>{room.name}</li>
-        );
         return(
-            <ul>{roomList}</ul>
+          <div>
+           
+          {
+            this.state.rooms.map((room, key) => <ul key = {room.key}>{room.name}</ul>
+            )}
+            
+         
+            <form onSubmit={(e) => this.createRoom(e)}> 
+                <input type="text" value={this.state.name} onChange={(e) => this.handleChange(e)}/>
+                <input type="submit"/>
+            </form>
+        
+
+          </div>
         );
     }
 }
