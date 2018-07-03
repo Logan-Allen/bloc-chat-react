@@ -47,8 +47,9 @@ export class MessageList extends Component {
     
     messageContent(e) {
         e.preventDefault();
+        const activeUser = this.props.user === null ? "Guest" : this.props.user.displayName;
         this.setState({
-            username: "user",
+            username: activeUser,
             content: e.target.value,
             sentAt: firebase.database.ServerValue.TIMESTAMP,
             roomId: this.props.activeRoom
@@ -62,7 +63,7 @@ export class MessageList extends Component {
         const currentMessages = (
             this.state.messages.map((message) => {
                 if(message.roomId === activeRoom) {
-                    return <ol key={message.key}>{message.content}</ol>
+                    return <li key={message.key}>{message.content}</li>
                 }
                 return null;
             })
