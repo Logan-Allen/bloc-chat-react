@@ -6,6 +6,10 @@ export class User extends Component {
     constructor(props) {
         super(props);
         
+        this.state = {
+            
+        }
+        
        
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
@@ -30,7 +34,7 @@ export class User extends Component {
         return (
             <div>
                 <h3> {this.props.activeUser} is signed in </h3>
-                <p> {this.props.activeUser === "Guest" ? "Please Sign in" : "Signed in"} </p>
+                <h4> {this.props.activeUser === "Guest" ? "Please Sign in" : "Signed in"} </h4>
                 <button type="button" className= "sign-in" onClick = {this.signIn}> Sign in </button>
                 <button type="button" className= "sign-out" onClick = {this.signOut}> Sign Out </button>
             </div>
