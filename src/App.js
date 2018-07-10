@@ -13,7 +13,8 @@ var config = {
     databaseURL: "https://bloc-chat-12d57.firebaseio.com",
     projectId: "bloc-chat-12d57",
     storageBucket: "bloc-chat-12d57.appspot.com",
-    messagingSenderId: "433744272645"
+    messagingSenderId: "433744272645",
+
   };
   firebase.initializeApp(config);
   
@@ -22,19 +23,19 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      user: null
+      user: ""
     };
     this.setActiveRoom = this.setActiveRoom.bind(this);
     this.setUser = this.setUser.bind(this);
   }
   
-setActiveRoom(room) {
-  this.setState({ activeRoom: room });
-}
+  setActiveRoom(room) {
+    this.setState({ activeRoom: room });
+  }
 
-setUser(user) {
-  this.setState({ activeUser: user });
-}
+  setUser(user) {
+    this.setState({ activeUser: user });
+  }
 
   
   
@@ -46,11 +47,11 @@ setUser(user) {
     return ( 
       <div className="App">
       <h1>Bloc Chat</h1>
-      <User firebase={firebase} setUser={this.setUser} activeUser={activeUser} />
       <h2>{this.state.activeRoom.name || "Select or Create a room"}</h2>
+      <User firebase={firebase} setUser={this.setUser} activeUser={activeUser} />
       <RoomList firebase = {firebase} setActiveRoom={this.setActiveRoom} />
       { listMessages ? 
-        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom.key} />
+        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom.key}/>
         : null }
       </div>
       
