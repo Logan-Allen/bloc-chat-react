@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      user: ""
+      user: null
     };
     this.setActiveRoom = this.setActiveRoom.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   setUser(user) {
-    this.setState({ activeUser: user });
+    this.setState({ user: user });
   }
 
   
@@ -48,7 +48,7 @@ class App extends Component {
       <div className="App">
       <h1>Bloc Chat</h1>
       <h2>{this.state.activeRoom.name || "Select or Create a room"}</h2>
-      <User firebase={firebase} setUser={this.setUser} activeUser={activeUser} />
+      <User firebase={firebase} setUser={this.setUser} userHere={activeUser} />
       <RoomList firebase = {firebase} setActiveRoom={this.setActiveRoom} />
       { listMessages ? 
         <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom.key}/>

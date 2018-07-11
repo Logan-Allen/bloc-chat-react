@@ -33,9 +33,12 @@ export class User extends Component {
     render(){
         return (
             <div>
-                <h4>Signed in as: {this.props.activeUser ? this.props.activeUser.displayName : "Guest"}</h4>
-                  <button onClick = {this.signIn}>Sign in</button>
-                  <button onClick = {this.signOut}>Sign out</button>
+                <p>Signed in as: {this.props.userHere}</p>
+                {this.props.userHere === "Guest" ?
+                  <button onClick={this.signIn}>Sign in</button>
+                  :
+                  <button onClick={this.signOut}>Sign out</button>
+                }
             </div>
         )
     }
