@@ -5,7 +5,9 @@ import React, { Component } from 'react';
 export class User extends Component {
     constructor(props){
         super(props)
-        
+        this.state ={
+            username: null
+        };
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
     }
@@ -20,7 +22,8 @@ export class User extends Component {
         const provider = new this.props.firebase.auth.GoogleAuthProvider();
         this.props.firebase.auth().signInWithPopup(provider).then((result) => {
             const user = result.user;
-            this.props.setUser(user);
+            // this.props.setUser(user);
+            this.setState({username: user})
         });
     }
     
@@ -34,7 +37,7 @@ export class User extends Component {
         return (
             <div>
                 <p>Signed in as: {this.props.userHere}</p>
-                {this.props.userHere === "Guest" ?
+                {!this.state.username ?
                   <button onClick={this.signIn}>Sign in</button>
                   :
                   <button onClick={this.signOut}>Sign out</button>
