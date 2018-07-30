@@ -51,7 +51,7 @@ class App extends Component {
       <User firebase={firebase} setUser={this.setUser} userHere={activeUser} />
       <RoomList firebase = {firebase} setActiveRoom={this.setActiveRoom} />
       { listMessages ? 
-        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom.key}/>
+        <MessageList firebase={firebase} activeRoom={this.state.activeRoom.key} user={this.state.user.displayName}/>
         : null }
       </div>
       
